@@ -7,6 +7,9 @@ import {
 // ============================================================
 // Constants
 // ============================================================
+// NOTE: STORAGE_KEY is intentionally kept as 'giftradar:data' so existing
+// localStorage data survives the rename to Dearly Noted. This key is
+// internal-only and never surfaced to the user.
 const STORAGE_KEY = 'giftradar:data';
 
 // Occasion preset definitions.
@@ -129,6 +132,9 @@ function useData() {
 
 // ============================================================
 // Styles (single injected stylesheet — refactor to CSS modules later if desired)
+// NOTE: 'gr-' class prefix kept from the Gift Radar era. Internal naming only,
+// never user-visible. Renaming every class costs a ~200-line churn diff for
+// zero behavioral benefit.
 // ============================================================
 const GlobalStyles = () => (
   <style>{`
@@ -682,9 +688,9 @@ const Dashboard = ({ data, onOpenPerson, onAddPerson }) => {
           <div className="ring r4"></div>
           <div className="sweep"></div>
         </div>
-        <div className="gr-empty-title">Nothing on the radar yet</div>
+        <div className="gr-empty-title">Nothing noted yet</div>
         <div className="gr-empty-body">
-          Add the people you give gifts to — family, close friends, your partner. Gift Radar will keep an eye on their occasions and remember what they've mentioned wanting.
+          Add the people you give gifts to — family, close friends, your partner. Dearly Noted will keep an eye on their occasions and remember what they've mentioned wanting.
         </div>
         <button className="gr-btn accent" onClick={onAddPerson}><Plus size={16} /> Add your first person</button>
       </div>
@@ -1022,7 +1028,7 @@ export default function App() {
               <div className="sweep"></div>
               <div className="dot"></div>
             </div>
-            <div className="gr-brand-name">Gift <b>Radar</b></div>
+            <div className="gr-brand-name">Dearly <b>Noted</b></div>
           </div>
         </div>
 
@@ -1053,7 +1059,7 @@ export default function App() {
           <PeopleList data={data} onOpenPerson={setOpenPersonId} onAddPerson={() => setModal('addPerson')} />
         )}
 
-        <div className="gr-footer-note">GIFT RADAR · v0.2 · LOCAL</div>
+        <div className="gr-footer-note">DEARLY NOTED · v0.3 · LOCAL</div>
       </div>
 
       {!openPersonId && (
