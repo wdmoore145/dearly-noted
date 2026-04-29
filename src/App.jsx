@@ -154,6 +154,7 @@ const GlobalStyles = () => (
       --landed: #5E7A54;
       --missed: #9E5B50;
       --neutral: #8B7F6A;
+      --tag-fill: #FAF5E9;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -185,13 +186,8 @@ const GlobalStyles = () => (
 
     .gr-header { padding: 28px 0 12px; display: flex; align-items: center; justify-content: space-between; }
     .gr-brand { display: flex; align-items: center; gap: 10px; }
-    .gr-brand-mark { position: relative; width: 28px; height: 28px; }
-    .gr-brand-mark .ring { position: absolute; inset: 0; border: 1px solid var(--ink); border-radius: 50%; }
-    .gr-brand-mark .ring.r2 { inset: 5px; opacity: 0.55; }
-    .gr-brand-mark .ring.r3 { inset: 10px; opacity: 0.3; }
-    .gr-brand-mark .dot { position: absolute; top: 3px; right: 3px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(181,80,47,0.15); }
-    .gr-brand-mark .sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 210deg, transparent 0deg, rgba(181,80,47,0.18) 40deg, transparent 80deg); animation: sweep 4.5s linear infinite; }
-    @keyframes sweep { to { transform: rotate(360deg); } }
+    .gr-brand-mark { width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; }
+    .gr-brand-mark svg { display: block; }
     .gr-brand-name { font-family: 'Fraunces', serif; font-weight: 400; font-style: italic; font-size: 22px; letter-spacing: -0.02em; font-variation-settings: "opsz" 144; }
     .gr-brand-name b { font-style: normal; font-weight: 500; font-family: 'Fraunces', serif; }
 
@@ -311,12 +307,8 @@ const GlobalStyles = () => (
     @keyframes rise { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
     .gr-empty { text-align: center; padding: 48px 20px; }
-    .gr-empty-radar { width: 120px; height: 120px; margin: 0 auto 20px; position: relative; }
-    .gr-empty-radar .ring { position: absolute; inset: 0; border: 1px dashed var(--line); border-radius: 50%; }
-    .gr-empty-radar .ring.r2 { inset: 18px; opacity: 0.7; }
-    .gr-empty-radar .ring.r3 { inset: 36px; opacity: 0.5; }
-    .gr-empty-radar .ring.r4 { inset: 52px; opacity: 0.3; }
-    .gr-empty-radar .sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0deg, rgba(181,80,47,0.22) 60deg, transparent 100deg); animation: sweep 5s linear infinite; }
+    .gr-empty-mark { width: 120px; height: 120px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; opacity: 0.85; }
+    .gr-empty-mark svg { display: block; width: 100%; height: 100%; }
     .gr-empty-title { font-family: 'Fraunces', serif; font-size: 22px; letter-spacing: -0.02em; margin-bottom: 6px; }
     .gr-empty-body { color: var(--ink-3); max-width: 340px; margin: 0 auto 18px; font-size: 14px; line-height: 1.55; }
 
@@ -681,12 +673,12 @@ const Dashboard = ({ data, onOpenPerson, onAddPerson }) => {
   if (data.people.length === 0) {
     return (
       <div className="gr-empty">
-        <div className="gr-empty-radar">
-          <div className="ring"></div>
-          <div className="ring r2"></div>
-          <div className="ring r3"></div>
-          <div className="ring r4"></div>
-          <div className="sweep"></div>
+        <div className="gr-empty-mark">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M 14 4 Q 12 2, 14 1 Q 17 0, 18 2 Q 20 4, 18 5" fill="none" stroke="var(--ink)" strokeWidth="1.4" strokeLinecap="round"/>
+            <path d="M 16 5 L 22 11 L 22 27 Q 22 29, 20 29 L 12 29 Q 10 29, 10 27 L 10 11 Z" fill="var(--tag-fill)" stroke="var(--ink)" strokeWidth="1.6" strokeLinejoin="round"/>
+            <circle cx="16" cy="9" r="1.4" fill="none" stroke="var(--ink)" strokeWidth="1.2"/>
+          </svg>
         </div>
         <div className="gr-empty-title">Nothing noted yet</div>
         <div className="gr-empty-body">
@@ -1022,11 +1014,11 @@ export default function App() {
         <div className="gr-header">
           <div className="gr-brand">
             <div className="gr-brand-mark">
-              <div className="ring"></div>
-              <div className="ring r2"></div>
-              <div className="ring r3"></div>
-              <div className="sweep"></div>
-              <div className="dot"></div>
+              <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M 14 4 Q 12 2, 14 1 Q 17 0, 18 2 Q 20 4, 18 5" fill="none" stroke="var(--ink)" strokeWidth="1.4" strokeLinecap="round"/>
+                <path d="M 16 5 L 22 11 L 22 27 Q 22 29, 20 29 L 12 29 Q 10 29, 10 27 L 10 11 Z" fill="var(--tag-fill)" stroke="var(--ink)" strokeWidth="1.6" strokeLinejoin="round"/>
+                <circle cx="16" cy="9" r="1.4" fill="none" stroke="var(--ink)" strokeWidth="1.2"/>
+              </svg>
             </div>
             <div className="gr-brand-name">Dearly <b>Noted</b></div>
           </div>
@@ -1059,7 +1051,7 @@ export default function App() {
           <PeopleList data={data} onOpenPerson={setOpenPersonId} onAddPerson={() => setModal('addPerson')} />
         )}
 
-        <div className="gr-footer-note">DEARLY NOTED · v0.3 · LOCAL</div>
+        <div className="gr-footer-note">DEARLY NOTED · v0.4 · LOCAL</div>
       </div>
 
       {!openPersonId && (

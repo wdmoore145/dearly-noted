@@ -20,7 +20,7 @@ export default defineConfig({
         short_name: 'Dearly Noted',
         description: 'A quiet radar for the gifts you plan to give.',
         theme_color: '#B5502F',
-        background_color: '#F1EADC',
+        background_color: '#B5502F',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/',
